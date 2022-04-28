@@ -1,7 +1,7 @@
 import countries from '../assets/countries.json';
 import './editor.scss';
 import { edit, globe } from '@wordpress/icons';
-import { BlockControls } from '@wordpress/block-editor';
+import { BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { ComboboxControl, Placeholder, ToolbarButton, ToolbarGroup } from '@wordpress/components';
 import { getEmojiFlag } from './utils';
 import { useEffect, useState } from '@wordpress/element';
@@ -10,6 +10,7 @@ import Preview from './preview';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { countryCode, relatedPosts } = attributes;
+	console.log( countryCode );
 	const options = Object.keys(countries).map(code => ({
         value: code,
         label:  getEmojiFlag( code ) + '  ' + countries[code] + ' — ' + code
@@ -63,7 +64,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							icon={ edit } onClick={ handleChangeCountry } disabled={ ! Boolean( countryCode ) } />
 				</ToolbarGroup>
 			</BlockControls>
-			<div>
+			<div { ...useBlockProps() }>
 				{ isPreview ? <Preview countryCode={ countryCode } relatedPosts={ relatedPosts }/> : <Placeholder icon={ globe } label={ __( 'XWP Country Card', 'xwp-country-card' ) }
 								 isColumnLayout={ true }
 								 instructions={ __( 'Type in a name of a contry you want to display on you site.', 'xwp-country-card' ) }>
