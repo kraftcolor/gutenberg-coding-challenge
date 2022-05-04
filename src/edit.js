@@ -17,6 +17,7 @@ import { __ } from '@wordpress/i18n';
  */
 import countries from '../assets/countries.json';
 import Preview from './preview';
+import useRelatedPosts from './useRelatedPosts';
 import './editor.scss';
 import { getEmojiFlag } from './utils';
 
@@ -28,6 +29,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	} ) );
 
 	const [ isPreview, setPreview ] = useState();
+	const { fetchedPosts, postsResolved } = useRelatedPosts( countryCode );
 
 	useEffect( () => setPreview( countryCode ), [ countryCode ] );
 
@@ -46,29 +48,17 @@ export default function Edit( { attributes, setAttributes } ) {
 	};
 
 	useEffect( () => {
-		async function getRelatedPosts() {
-			const postId = window.location.href.match( /post=([\d]+)/ )[ 1 ];
-			const response = await window.fetch(
-				`/wp-json/wp/v2/posts?search=${ countries[ countryCode ] }&exclude=${ postId }`
-			);
-
-			if ( ! response.ok )
-				throw new Error( `HTTP error! Status: ${ response.status }` );
-
-			const posts = await response.json();
-
+		if ( postsResolved === true ) {
 			setAttributes( {
 				relatedPosts:
-					posts?.map( ( relatedPost ) => ( {
+					fetchedPosts?.map( ( relatedPost ) => ( {
 						...relatedPost,
 						title: relatedPost.title?.rendered || relatedPost.link,
 						excerpt: relatedPost.excerpt?.rendered || '',
 					} ) ) || [],
 			} );
 		}
-
-		getRelatedPosts();
-	}, [ countryCode, setAttributes ] );
+	}, [ fetchedPosts, postsResolved, setAttributes ] );
 
 	return (
 		<>
