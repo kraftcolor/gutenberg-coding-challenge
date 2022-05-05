@@ -1,6 +1,10 @@
 /**
  * WordPress dependencies
  */
+/**
+ * External dependencies
+ */
+import DOMPurify from 'dompurify';
 import { __, sprintf } from '@wordpress/i18n';
 
 /**
@@ -55,14 +59,18 @@ export default function Preview( { countryCode, relatedPosts } ) {
 									<h3
 										className="title"
 										dangerouslySetInnerHTML={ {
-											__html: relatedPost.title,
+											__html: DOMPurify.sanitize(
+												relatedPost.title
+											),
 										} }
 									/>
 
 									<p
 										className="excerpt"
 										dangerouslySetInnerHTML={ {
-											__html: relatedPost.excerpt,
+											__html: DOMPurify.sanitize(
+												relatedPost.excerpt
+											),
 										} }
 									/>
 								</a>
