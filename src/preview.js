@@ -25,13 +25,13 @@ export default function Preview( { countryCode, relatedPosts } ) {
 	const continentName = continentNames[ continents[ countryCode ] ];
 
 	return (
-		<div className="xwp-country-card">
-			<div
+		<section className="xwp-country-card">
+			<header
 				className="xwp-country-card__media"
 				data-emoji-flag={ emojiFlag }
 			>
-				<div className="xwp-country-card-flag">{ emojiFlag }</div>
-			</div>
+				<figure className="xwp-country-card-flag">{ emojiFlag }</figure>
+			</header>
 			<h3 className="xwp-country-card__heading">
 				{ createInterpolateElement(
 					sprintf(
@@ -76,14 +76,17 @@ export default function Preview( { countryCode, relatedPosts } ) {
 				{ hasRelatedPosts && (
 					<ul className="xwp-country-card__related-posts-list">
 						{ relatedPosts.map( ( relatedPost, index ) => (
-							<li key={ index } className="related-post">
+							<li
+								key={ index }
+								className="xwp-country-card__related-post"
+							>
 								<a
-									className="link"
+									className="xwp-country-card__link"
 									href={ relatedPost.link }
 									data-post-id={ relatedPost.id }
 								>
 									<h3
-										className="title"
+										className="xwp-country-card__title"
 										dangerouslySetInnerHTML={ {
 											__html: DOMPurify.sanitize(
 												relatedPost.title
@@ -92,7 +95,7 @@ export default function Preview( { countryCode, relatedPosts } ) {
 									/>
 
 									<summary
-										className="excerpt"
+										className="xwp-country-card__excerpt"
 										dangerouslySetInnerHTML={ {
 											__html: DOMPurify.sanitize(
 												relatedPost.excerpt
@@ -105,6 +108,6 @@ export default function Preview( { countryCode, relatedPosts } ) {
 					</ul>
 				) }
 			</div>
-		</div>
+		</section>
 	);
 }
