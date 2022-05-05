@@ -51,7 +51,7 @@ export default function Edit( { attributes, setAttributes, context } ) {
 				relatedPosts:
 					fetchedPosts?.map( ( relatedPost ) => ( {
 						...relatedPost,
-						title: relatedPost.title?.rendered || relatedPost.link,
+						title: relatedPost.title?.rendered || '',
 						excerpt: trimContent( relatedPost.content?.rendered ),
 					} ) ) || [],
 			} );
