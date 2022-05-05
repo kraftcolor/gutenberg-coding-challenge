@@ -5,7 +5,8 @@
  * External dependencies
  */
 import DOMPurify from 'dompurify';
-import { __, sprintf } from '@wordpress/i18n';
+import { __, _n, sprintf } from '@wordpress/i18n';
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -18,8 +19,10 @@ import { getEmojiFlag } from './utils';
 export default function Preview( { countryCode, relatedPosts } ) {
 	if ( ! countryCode ) return null;
 
-	const emojiFlag = getEmojiFlag( countryCode ),
-		hasRelatedPosts = relatedPosts?.length > 0;
+	const emojiFlag = getEmojiFlag( countryCode );
+	const hasRelatedPosts = relatedPosts?.length > 0;
+	const countryName = countries[ countryCode ];
+	const continentName = continentNames[ continents[ countryCode ] ];
 
 	return (
 		<div className="xwp-country-card">
@@ -30,22 +33,45 @@ export default function Preview( { countryCode, relatedPosts } ) {
 				<div className="xwp-country-card-flag">{ emojiFlag }</div>
 			</div>
 			<h3 className="xwp-country-card__heading">
-				{ __( 'Hello from' ) }{ ' ' }
-				<strong>{ countries[ countryCode ] }</strong> (
-				<span className="xwp-country-card__country-code">
-					{ countryCode }
-				</span>
-				), { continentNames[ continents[ countryCode ] ] }!
+				{ createInterpolateElement(
+					sprintf(
+						/* translators: %1$s: Country Name, %2$s: Country Code, %3$s: Continent Name */
+						__(
+							'Hello from <strong>%1$s</strong> (<span>%2$s</span>), %3$s',
+							'xwp-country-card'
+						),
+						countryName,
+						countryCode,
+						continentName
+					),
+					{
+						strong: <strong />,
+						span: (
+							<abbr
+								className="xwp-country-card__country-code"
+								title={ countries[ countryCode ] }
+							/>
+						),
+					}
+				) }
 			</h3>
 			<div className="xwp-country-card__related-posts">
 				<h3 className="xwp-country-card__related-posts__heading">
 					{ hasRelatedPosts
 						? sprintf(
 								/* translators: %d: number of related posts */
-								__( 'There are %d related posts:' ),
+								_n(
+									'There is %d related post:',
+									'There are %d related posts:',
+									relatedPosts.length,
+									'xwp-country-card'
+								),
 								relatedPosts.length
 						  )
-						: __( 'There are no related posts.' ) }
+						: __(
+								'There are no related posts.',
+								'xwp-country-card'
+						  ) }
 				</h3>
 				{ hasRelatedPosts && (
 					<ul className="xwp-country-card__related-posts-list">
