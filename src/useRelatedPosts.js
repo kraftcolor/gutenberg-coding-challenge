@@ -23,7 +23,6 @@ const useRelatedPosts = ( countryCode ) => {
 			'postType',
 			'post',
 			{
-				per_page: -1,
 				exclude: select( 'core/editor' ).getCurrentPostId(),
 				search: countries[ countryCode ],
 				fields: [ 'id', 'title', 'excerpt', 'link' ],
