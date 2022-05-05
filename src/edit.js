@@ -24,7 +24,10 @@ export default function Edit( { attributes, setAttributes, context } ) {
 	const { postId } = context;
 	const { countryCode, relatedPosts } = attributes;
 	const [ isPreview, setPreview ] = useState();
-	const { fetchedPosts, postsResolved } = useRelatedPosts( countryCode, postId );
+	const { fetchedPosts, postsResolved } = useRelatedPosts(
+		countryCode,
+		postId
+	);
 
 	useEffect( () => setPreview( countryCode ), [ countryCode ] );
 
