@@ -26,7 +26,7 @@ const useRelatedPosts = ( countryCode, postId ) => {
 			{
 				exclude: postId,
 				search: countries[ countryCode ],
-				fields: [ 'id', 'title', 'excerpt', 'link' ],
+				_fields: [ 'id', 'title', 'link', 'content' ],
 			},
 		];
 
