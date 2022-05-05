@@ -94,7 +94,7 @@ export default function Preview( { countryCode, relatedPosts } ) {
 										} }
 									/>
 
-									<summary
+									<div
 										className="xwp-country-card__excerpt"
 										dangerouslySetInnerHTML={ {
 											__html: DOMPurify.sanitize(
