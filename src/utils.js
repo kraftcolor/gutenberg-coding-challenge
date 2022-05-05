@@ -28,9 +28,9 @@ export function trimContent( content, length = 5 ) {
 	return `${ content.trim().split( ' ', length ).join( ' ' ) }…`;
 }
 
-export const countrySelectOptions = Object.keys( countries ).map(
-	( code ) => ( {
+export const countrySelectOptions = Object.entries( countries ).map(
+	( [ code, name ] ) => ( {
 		value: code,
-		label: `${ getEmojiFlag( code ) } ${ countries[ code ] } ${ code }`,
+		label: `${ getEmojiFlag( code ) } ${ name } ${ code }`,
 	} )
 );
