@@ -20,10 +20,11 @@ import useRelatedPosts from './useRelatedPosts';
 import './editor.scss';
 import { trimContent, countrySelectOptions } from './utils';
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, context } ) {
+	const { postId } = context;
 	const { countryCode, relatedPosts } = attributes;
 	const [ isPreview, setPreview ] = useState();
-	const { fetchedPosts, postsResolved } = useRelatedPosts( countryCode );
+	const { fetchedPosts, postsResolved } = useRelatedPosts( countryCode, postId );
 
 	useEffect( () => setPreview( countryCode ), [ countryCode ] );
 

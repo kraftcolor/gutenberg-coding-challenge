@@ -15,15 +15,16 @@ import countries from '../assets/countries.json';
  *
  * @param {string} countryCode Country Code.
  *
+ * @param {number} postId      Post ID to find related posts of.
  * @return {Object} Object with posts related to the country code.
  */
-const useRelatedPosts = ( countryCode ) => {
+const useRelatedPosts = ( countryCode, postId ) => {
 	const { fetchedPosts, postsResolved } = useSelect( ( select ) => {
 		const selectorArgs = [
 			'postType',
 			'post',
 			{
-				exclude: select( 'core/editor' ).getCurrentPostId(),
+				exclude: postId,
 				search: countries[ countryCode ],
 				fields: [ 'id', 'title', 'excerpt', 'link' ],
 			},
