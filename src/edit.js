@@ -15,19 +15,13 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import countries from '../assets/countries.json';
 import Preview from './preview';
 import useRelatedPosts from './useRelatedPosts';
 import './editor.scss';
-import { getEmojiFlag, trimContent } from './utils';
+import { trimContent, countrySelectOptions } from './utils';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { countryCode, relatedPosts } = attributes;
-	const options = Object.keys( countries ).map( ( code ) => ( {
-		value: code,
-		label: getEmojiFlag( code ) + '  ' + countries[ code ] + ' — ' + code,
-	} ) );
-
 	const [ isPreview, setPreview ] = useState();
 	const { fetchedPosts, postsResolved } = useRelatedPosts( countryCode );
 
@@ -91,7 +85,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<ComboboxControl
 							label={ __( 'Country', 'xwp-country-card' ) }
 							hideLabelFromVision
-							options={ options }
+							options={ countrySelectOptions }
 							value={ countryCode }
 							onChange={ handleChangeCountryCode }
 							allowReset={ true }

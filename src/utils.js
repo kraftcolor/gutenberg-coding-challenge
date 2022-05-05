@@ -1,3 +1,8 @@
+/**
+ * Internal dependencies
+ */
+import countries from '../assets/countries.json';
+
 export function getEmojiFlag( countryCode ) {
 	return String.fromCodePoint(
 		...countryCode
@@ -22,3 +27,10 @@ export function trimContent( content, length = 5 ) {
 
 	return `${ content.trim().split( ' ', length ).join( ' ' ) }…`;
 }
+
+export const countrySelectOptions = Object.keys( countries ).map(
+	( code ) => ( {
+		value: code,
+		label: `${ getEmojiFlag( code ) } ${ countries[ code ] } ${ code }`,
+	} )
+);
