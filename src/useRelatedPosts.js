@@ -14,8 +14,8 @@ import countries from '../assets/countries.json';
  * (https://github.com/WordPress/gutenberg/pull/40162).
  *
  * @param {string} countryCode Country Code.
- *
  * @param {number} postId      Post ID to find related posts of.
+ *
  * @return {Object} Object with posts related to the country code.
  */
 const useRelatedPosts = ( countryCode, postId ) => {
