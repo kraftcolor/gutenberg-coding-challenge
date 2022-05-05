@@ -19,7 +19,7 @@ import countries from '../assets/countries.json';
 import Preview from './preview';
 import useRelatedPosts from './useRelatedPosts';
 import './editor.scss';
-import { getEmojiFlag } from './utils';
+import { getEmojiFlag, trimContent } from './utils';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { countryCode, relatedPosts } = attributes;
