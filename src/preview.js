@@ -32,7 +32,7 @@ export default function Preview( { countryCode, relatedPosts } ) {
 			>
 				<figure className="xwp-country-card-flag">{ emojiFlag }</figure>
 			</header>
-			<h3 className="xwp-country-card__heading">
+			<h1 className="xwp-country-card__heading">
 				{ createInterpolateElement(
 					sprintf(
 						/* translators: %1$s: Country Name, %2$s: Country Code, %3$s: Continent Name */
@@ -54,9 +54,9 @@ export default function Preview( { countryCode, relatedPosts } ) {
 						),
 					}
 				) }
-			</h3>
-			<div className="xwp-country-card__related-posts">
-				<h3 className="xwp-country-card__related-posts__heading">
+			</h1>
+			<aside className="xwp-country-card__related-posts">
+				<h2 className="xwp-country-card__related-posts__heading">
 					{ hasRelatedPosts
 						? sprintf(
 								/* translators: %d: number of related posts */
@@ -72,7 +72,7 @@ export default function Preview( { countryCode, relatedPosts } ) {
 								'There are no related posts.',
 								'xwp-country-card'
 						  ) }
-				</h3>
+				</h2>
 				{ hasRelatedPosts && (
 					<ul className="xwp-country-card__related-posts-list">
 						{ relatedPosts.map( ( relatedPost ) => (
@@ -107,7 +107,7 @@ export default function Preview( { countryCode, relatedPosts } ) {
 						) ) }
 					</ul>
 				) }
-			</div>
+			</aside>
 		</section>
 	);
 }
