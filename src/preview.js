@@ -65,7 +65,7 @@ export default function Preview( { countryCode, relatedPosts } ) {
 										} }
 									/>
 
-									<p
+									<summary
 										className="excerpt"
 										dangerouslySetInnerHTML={ {
 											__html: DOMPurify.sanitize(
