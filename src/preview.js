@@ -52,12 +52,19 @@ export default function Preview( { countryCode, relatedPosts } ) {
 									href={ relatedPost.link }
 									data-post-id={ relatedPost.id }
 								>
-									<h3 className="title">
-										{ relatedPost.title }
-									</h3>
-									<p className="excerpt">
-										{ relatedPost.excerpt }
-									</p>
+									<h3
+										className="title"
+										dangerouslySetInnerHTML={ {
+											__html: relatedPost.title,
+										} }
+									/>
+
+									<p
+										className="excerpt"
+										dangerouslySetInnerHTML={ {
+											__html: relatedPost.excerpt,
+										} }
+									/>
 								</a>
 							</li>
 						) ) }
